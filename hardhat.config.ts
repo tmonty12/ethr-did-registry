@@ -19,6 +19,10 @@ task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
   }
 })
 
+task('env', 'Prints the environment variables', async (taskArgs, hre) => {
+  console.log(process.env)
+})
+
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
@@ -46,6 +50,13 @@ const config: HardhatUserConfig = {
     ropsten: {
       url: process.env.ROPSTEN_URL || '',
       accounts: process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
+    hardhat: {
+      chainId: 1337
+    },
+    goerli: {
+      url: `https://eth-goerli.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`,
+      accounts: process.env.TEST_ACCOUNT_1_PRIVATE_KEY ? [process.env.TEST_ACCOUNT_1_PRIVATE_KEY] : []
     },
   },
   gasReporter: {
